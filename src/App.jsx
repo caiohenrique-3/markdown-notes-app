@@ -6,7 +6,7 @@ import Editor from "./components/Editor";
 import { data } from "./data";
 
 // dependencies
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Split from "react-split";
 import { nanoid } from "nanoid";
 
@@ -15,10 +15,11 @@ import "./styles/index.css";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 export default function App() {
-  // Initializes the currentNoteId state with the ID of the first note,
-  // if the notes array is not an empty string (has at least one element)
-  // . If the array is empty, initializes the currentNoteId as an empty string.
-  const [notes, setNotes] = useState([]);
+  // Using a function returning a value makes
+  // the State not re-initialize every App() re-render
+  const [notes, setNotes] = useState(
+    () => JSON.parse(localStorage.getItem("notes")) || [],
+  );
   const [currentNoteId, setCurrentNoteId] = useState(
     (notes[0] && notes[0].id) || "",
   );
@@ -54,6 +55,13 @@ export default function App() {
       return note.id === currentNoteId;
     }) || notes[0];
   }
+
+  // Every time there's a change in the notes array,
+  // save it to the local storage.
+  useEffect(() => {
+    const notesInString = JSON.stringify(notes);
+    localStorage.setItem("notes", notesInString);
+  }, [notes]);
 
   return (
     <main>

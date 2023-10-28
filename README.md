@@ -4,7 +4,6 @@ Create, edit and live preview your markdown notes with this React app!
 
 ## TODO
 
-- Sync notes with localStorage
 - Add note summary titles
 - Move modified notes to the top of the list
 - Delete notes
