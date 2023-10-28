@@ -4,7 +4,6 @@ Create, edit and live preview your markdown notes with this React app!
 
 ## TODO
 
-- Move modified notes to the top of the list
 - Delete notes
 - Dark/light mode if possible
 

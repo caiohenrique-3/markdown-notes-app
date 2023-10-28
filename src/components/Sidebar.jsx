@@ -14,8 +14,6 @@ export default function Sidebar(props) {
     </div>
   ));
 
-  // \n
-
   return (
     <section className="pane sidebar">
       <div className="sidebar--header">

@@ -37,13 +37,25 @@ export default function App() {
   }
 
   function updateNote(text) {
+    const input = document.activeElement;
+
     setNotes((oldNotes) =>
-      oldNotes.map((oldNote) => {
-        return oldNote.id === currentNoteId
-          ? { ...oldNote, body: text }
-          : oldNote;
-      })
+      oldNotes.map((oldNote) =>
+        oldNote.id === currentNoteId ? { ...oldNote, body: text } : oldNote
+      )
     );
+
+    if (currentNoteId !== notes[0].id) {
+      const indexToShift = notes.findIndex((note) => note.id === currentNoteId);
+
+      const newArray = [...notes];
+      const noteToShift = newArray.splice(indexToShift, 1);
+      newArray.unshift(noteToShift[0]);
+
+      setNotes(newArray);
+    }
+
+    input.focus();
   }
 
   // Find method gets an arrow function as parameter
