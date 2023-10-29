@@ -2,11 +2,6 @@
 
 Create, edit and live preview your markdown notes with this React app!
 
-## TODO
-
-- Delete notes
-- Dark/light mode if possible
-
 ## Acknowledgments
 
 Special thanks to the following resources for their contributions to this

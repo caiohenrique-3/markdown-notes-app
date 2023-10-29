@@ -24,9 +24,6 @@ export default function App() {
     (notes[0] && notes[0].id) || "",
   );
 
-  // Nanoid generates an ID for the new note
-  // Calls setNotes, returns the new note + previous existing notes,
-  // Points currentNoteId to the newly created note in the array.
   function createNewNote() {
     const newNote = {
       id: nanoid(),
@@ -58,10 +55,13 @@ export default function App() {
     input.focus();
   }
 
-  // Find method gets an arrow function as parameter
-  // Iterates through every element on the array until it finds
-  // The one that returns true on our arrow funct condition
-  // If doesn't find anything, returns the first note on array.
+  function deleteNote(event, noteId) {
+    event.stopPropagation();
+    const newArray = notes.filter((note) => note.id !== noteId);
+
+    setNotes(newArray);
+  }
+
   function findCurrentNote() {
     return notes.find((note) => {
       return note.id === currentNoteId;
@@ -89,6 +89,7 @@ export default function App() {
               currentNote={findCurrentNote()}
               setCurrentNoteId={setCurrentNoteId}
               newNote={createNewNote}
+              deleteNote={deleteNote}
             />
             {currentNoteId &&
               notes.length > 0 &&
